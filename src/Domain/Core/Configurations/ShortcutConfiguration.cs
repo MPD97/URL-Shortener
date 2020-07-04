@@ -20,11 +20,13 @@ namespace Core.Configurations
 
             builder
                 .HasOne(a => a.Redirect)
-                .WithOne(a => a.Shortcut);
-            
+                .WithOne(a => a.Shortcut)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder
                 .HasOne(a => a.RedirectExtended)
-                .WithOne(a => a.Shortcut);
+                .WithOne(a => a.Shortcut)
+                .OnDelete(DeleteBehavior.Cascade);;
         }
     }
 }
