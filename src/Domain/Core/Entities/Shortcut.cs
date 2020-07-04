@@ -10,7 +10,7 @@ namespace Core.Entities
         public long RedirectId { get; set; }
         public long RedirectExtendedId { get; set; }
 
-        public virtual ICollection<Redirect> Redirects { get; set; }
-        public virtual ICollection<RedirectExtended> RedirectsExtended { get; set; }
+        public virtual Redirect Redirect { get; set; }
+        public virtual RedirectExtended RedirectExtended { get; set; }
     }
 }
