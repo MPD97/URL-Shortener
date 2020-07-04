@@ -8,8 +8,8 @@ namespace Core.Entities
         public string Alias { get; set; }
         public long TimesRedirect { get; set; }
         
-        public long RedirectId { get; set; }
-        public long RedirectExtendedId { get; set; }
+        public long? RedirectId { get; set; }
+        public long? RedirectExtendedId { get; set; }
 
         public virtual Redirect Redirect { get; set; }
         public virtual RedirectExtended RedirectExtended { get; set; }
