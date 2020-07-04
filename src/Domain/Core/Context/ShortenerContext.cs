@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Core.Context
 {
@@ -11,7 +12,7 @@ namespace Core.Context
             
         }
 
-        public ShortenerContext(DbContextOptions options) : base(options)
+        public ShortenerContext([NotNullAttribute] DbContextOptions options) : base(options)
         {
         }
     }
