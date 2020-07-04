@@ -16,7 +16,8 @@ namespace Core.Configurations
 
             builder
                 .HasOne(a => a.Shortcut)
-                .WithOne(a => a.Redirect);
+                .WithOne(a => a.Redirect)
+                .HasForeignKey<Shortcut>(a => a.RedirectId);
         }
     }
 }
