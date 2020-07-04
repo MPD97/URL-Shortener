@@ -6,7 +6,9 @@ namespace Core.Context
 {
     public class ShortenerContext :DbContext
     {
-        public DbSet<Redirect> Redirects { get; set; }    
+        public DbSet<Redirect> Redirects { get; set; }
+        public DbSet<RedirectExtended> RedirectExtendeds { get; set; }    
+        public DbSet<Shortcut> Shortcuts { get; set; }    
         public ShortenerContext()
         {
             
