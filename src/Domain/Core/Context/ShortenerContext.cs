@@ -8,12 +8,11 @@ namespace Core.Context
     {
         public DbSet<Redirect> Redirects { get; set; }
         public DbSet<RedirectExtended> RedirectExtendeds { get; set; }    
-        public DbSet<Shortcut> Shortcuts { get; set; }    
+        public DbSet<Shortcut> Shortcuts { get; set; }  
+        
         public ShortenerContext()
         {
-            
         }
-
         public ShortenerContext([NotNullAttribute] DbContextOptions options) : base(options)
         {
         }
