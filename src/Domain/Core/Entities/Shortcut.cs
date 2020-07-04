@@ -1,4 +1,6 @@
-﻿namespace Core.Entities
+﻿using System.Collections.Generic;
+
+namespace Core.Entities
 {
     public class Shortcut
     {
@@ -8,5 +10,7 @@
         public long RedirectId { get; set; }
         public long RedirectExtendedId { get; set; }
 
+        public virtual ICollection<Redirect> Redirects { get; set; }
+        public virtual ICollection<RedirectExtended> RedirectsExtended { get; set; }
     }
 }
