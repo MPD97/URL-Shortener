@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
+using Core.Configurations;
 
 namespace Core.Context
 {
@@ -15,6 +16,15 @@ namespace Core.Context
         }
         public ShortenerContext([NotNullAttribute] DbContextOptions options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ShortcutConfiguration());
+            modelBuilder.ApplyConfiguration(new RedirectConfiguration());
+            modelBuilder.ApplyConfiguration(new RedirectExtendedConfiguration());
+            
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
