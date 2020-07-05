@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Core.Context;
 using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Presistance.Repositories
 {
@@ -14,9 +15,10 @@ namespace Presistance.Repositories
             _shortenerContext = shortenerContext;
         }
 
-        public Task<RedirectExtended> FindByIdAsync(long id)
+        public async Task<RedirectExtended> FindByIdAsync(long id)
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.RedirectExtendeds
+                .SingleOrDefaultAsync(a => a.RedirectExtendedId == id);
         }
 
         public Task<RedirectExtended> FindByUrlAsync(string url)
