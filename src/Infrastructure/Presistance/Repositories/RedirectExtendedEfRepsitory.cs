@@ -41,9 +41,13 @@ namespace Presistance.Repositories
                 .ToListAsync();
         }
 
-        public Task<List<RedirectExtended>> GetAllAsync(int take, int skip)
+        public async Task<List<RedirectExtended>> GetAllAsync(int take, int skip)
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.RedirectExtendeds
+                .OrderByDescending(a => a.RedirectExtendedId)
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
         }
 
         public Task InsertAsync(RedirectExtended redirectExtended)
