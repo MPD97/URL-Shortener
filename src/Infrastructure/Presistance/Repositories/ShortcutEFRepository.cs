@@ -20,9 +20,9 @@ namespace Presistance.Repositories
             return await _shortenerContext.Shortcuts.SingleOrDefaultAsync(a => a.ShortcutId == id);
         }
 
-        public Task<Shortcut> FindByAliasAsync(string alias)
+        public async Task<Shortcut> FindByAliasAsync(string alias)
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.Shortcuts.SingleOrDefaultAsync(a => a.Alias == alias);
         }
 
         public Task<long> GetCountAsync()
