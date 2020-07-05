@@ -50,9 +50,9 @@ namespace Presistance.Repositories
                 .ToListAsync();
         }
 
-        public Task InsertAsync(Shortcut shortcut)
+        public async Task InsertAsync(Shortcut shortcut)
         {
-            throw new System.NotImplementedException();
+            _shortenerContext.Add(shortcut);
         }
 
         public Task<bool> DeleteAsync(long id)
