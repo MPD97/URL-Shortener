@@ -62,7 +62,7 @@ namespace Presistance.Repositories
 
         public Task UpdateAsync(Redirect redirect)
         {
-            throw new System.NotImplementedException();
+            _shortenerContext.Redirects.Update(redirect);
         }
 
         public Task<int> SaveChangesAsync()
