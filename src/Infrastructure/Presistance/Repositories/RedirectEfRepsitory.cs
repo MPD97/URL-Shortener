@@ -25,9 +25,9 @@ namespace Presistance.Repositories
             return await _shortenerContext.Redirects.SingleOrDefaultAsync(a => a.Url == url);
         }
 
-        public Task<long> GetCountAsync()
+        public async Task<long> GetCountAsync()
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.Redirects.CountAsync();
         }
 
         public Task<List<Redirect>> GetAllAsync()
