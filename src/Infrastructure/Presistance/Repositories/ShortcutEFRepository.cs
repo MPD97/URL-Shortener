@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Presistance.Repositories
 {
-    public class ShortcutEFRepository : IShortcutRepository
+    public class ShortcutEfRepository : IShortcutRepository
     {
         private readonly ShortenerContext _shortenerContext;
 
-        public ShortcutEFRepository(ShortenerContext shortenerContext)
+        public ShortcutEfRepository(ShortenerContext shortenerContext)
         {
             _shortenerContext = shortenerContext;
         }
