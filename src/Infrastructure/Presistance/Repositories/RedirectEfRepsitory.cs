@@ -57,7 +57,7 @@ namespace Presistance.Repositories
 
         public Task DeleteAsync(Redirect redirect)
         {
-            throw new System.NotImplementedException();
+             _shortenerContext.Redirects.Remove(redirect);
         }
 
         public Task UpdateAsync(Redirect redirect)
