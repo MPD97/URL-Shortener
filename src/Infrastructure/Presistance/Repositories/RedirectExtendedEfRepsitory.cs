@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Context;
 using Core.Entities;
@@ -33,9 +34,11 @@ namespace Presistance.Repositories
                 .CountAsync();
         }
 
-        public Task<List<RedirectExtended>> GetAllAsync()
+        public async Task<List<RedirectExtended>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.RedirectExtendeds
+                .OrderByDescending(a => a.RedirectExtendedId)
+                .ToListAsync();
         }
 
         public Task<List<RedirectExtended>> GetAllAsync(int take, int skip)
