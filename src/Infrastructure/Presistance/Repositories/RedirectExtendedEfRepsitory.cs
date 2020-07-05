@@ -65,9 +65,9 @@ namespace Presistance.Repositories
             _shortenerContext.RedirectExtendeds.Update(redirectExtended);
         }
 
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.SaveChangesAsync();
         }
     }
 }
