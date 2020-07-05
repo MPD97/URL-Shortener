@@ -36,6 +36,11 @@ namespace Presistance.Repositories
             return await _shortenerContext.Shortcuts.OrderByDescending(a => a.ShortcutId).ToListAsync();
         }
 
+        public async Task<List<Shortcut>> GetAllAsync(int take, int skip)
+        {
+            return await _shortenerContext.Shortcuts.OrderByDescending(a => a.ShortcutId).Skip(skip).Take(take).ToListAsync();
+        }
+
         public Task InsertAsync(Shortcut shortcut)
         {
             throw new System.NotImplementedException();
