@@ -31,9 +31,9 @@ namespace Presistance.Repositories
             return await _shortenerContext.Shortcuts.LongCountAsync();
         }
 
-        public Task<IEnumerable<Shortcut>> GetAllAsync()
+        public async Task<List<Shortcut>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.Shortcuts.ToListAsync();
         }
 
         public Task InsertAsync(Shortcut shortcut)
