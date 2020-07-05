@@ -21,10 +21,10 @@ namespace Presistance.Repositories
                 .SingleOrDefaultAsync(a => a.RedirectExtendedId == id);
         }
 
-        public Task<RedirectExtended> FindByUrlAsync(string url)
+        public async Task<RedirectExtended> FindByUrlAsync(string url)
         {
-            throw new System.NotImplementedException();
-        }
+            return await _shortenerContext.RedirectExtendeds
+                .SingleOrDefaultAsync(a => a.Url == url);        }
 
         public Task<long> GetCountAsync()
         {
