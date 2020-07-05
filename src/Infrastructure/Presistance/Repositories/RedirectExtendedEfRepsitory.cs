@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Presistance.Repositories
 {
-    public class RedirectExtendedEfRepsitory :IRedirectExtendedRepsitory
+    public class RedirectExtendedEfRepsitory : IRedirectExtendedRepsitory
     {
         private readonly ShortenerContext _shortenerContext;
 
@@ -24,7 +24,8 @@ namespace Presistance.Repositories
         public async Task<RedirectExtended> FindByUrlAsync(string url)
         {
             return await _shortenerContext.RedirectExtendeds
-                .SingleOrDefaultAsync(a => a.Url == url);        }
+                .SingleOrDefaultAsync(a => a.Url == url);
+        }
 
         public Task<long> GetCountAsync()
         {
