@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Core.Context;
 using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Presistance.Repositories
 {
@@ -14,9 +15,9 @@ namespace Presistance.Repositories
             _shortenerContext = shortenerContext;
         }
 
-        public Task<Shortcut> FindByIdAsync(long id)
+        public async Task<Shortcut> FindByIdAsync(long id)
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.Shortcuts.SingleOrDefaultAsync(a => a.ShortcutId == id);
         }
 
         public Task<Shortcut> FindByAliasAsync(string alias)
