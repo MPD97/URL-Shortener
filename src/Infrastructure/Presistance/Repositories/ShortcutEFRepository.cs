@@ -1,11 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Context;
 using Core.Entities;
 
 namespace Presistance.Repositories
 {
     public class ShortcutEFRepository :IShortcutRepository
     {
+        private readonly ShortenerContext _shortenerContext;
+
+        public ShortcutEFRepository(ShortenerContext shortenerContext)
+        {
+            _shortenerContext = shortenerContext;
+        }
+
         public Task<Shortcut> FindByIdAsync(long id)
         {
             throw new System.NotImplementedException();
