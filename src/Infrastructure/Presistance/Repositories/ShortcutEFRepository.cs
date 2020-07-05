@@ -33,7 +33,7 @@ namespace Presistance.Repositories
 
         public async Task<List<Shortcut>> GetAllAsync()
         {
-            return await _shortenerContext.Shortcuts.ToListAsync();
+            return await _shortenerContext.Shortcuts.OrderByDescending(a => a.ShortcutId).ToListAsync();
         }
 
         public Task InsertAsync(Shortcut shortcut)
