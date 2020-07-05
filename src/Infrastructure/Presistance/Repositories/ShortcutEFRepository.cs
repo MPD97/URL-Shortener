@@ -52,22 +52,26 @@ namespace Presistance.Repositories
 
         public async Task InsertAsync(Shortcut shortcut)
         {
-            await _shortenerContext.AddAsync(shortcut);
+            await _shortenerContext
+                .AddAsync(shortcut);
         }
 
         public async Task DeleteAsync(Shortcut shortcut)
         {
-            _shortenerContext.Remove(shortcut);
+            _shortenerContext
+                .Remove(shortcut);
         }
 
         public async Task UpdateAsync(Shortcut shortcut)
         {
-            _shortenerContext.Update(shortcut);
+            _shortenerContext
+                .Update(shortcut);
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            return await _shortenerContext.SaveChangesAsync();
+            return await _shortenerContext
+                .SaveChangesAsync();
         }
     }
 }
