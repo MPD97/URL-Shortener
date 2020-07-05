@@ -30,9 +30,9 @@ namespace Presistance.Repositories
             return await _shortenerContext.Redirects.CountAsync();
         }
 
-        public Task<List<Redirect>> GetAllAsync()
+        public async Task<List<Redirect>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.Redirects.ToListAsync();
         }
 
         public Task<List<Redirect>> GetAllAsync(int take, int skip)
