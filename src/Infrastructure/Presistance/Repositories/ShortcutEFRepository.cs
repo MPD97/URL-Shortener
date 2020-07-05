@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Presistance.Repositories
 {
-    public class ShortcutEFRepository :IShortcutRepository
+    public class ShortcutEFRepository : IShortcutRepository
     {
         private readonly ShortenerContext _shortenerContext;
 
@@ -55,9 +55,9 @@ namespace Presistance.Repositories
             _shortenerContext.Add(shortcut);
         }
 
-        public Task<bool> DeleteAsync(long id)
+        public Task<bool> DeleteAsync(Shortcut shortcut)
         {
-            throw new System.NotImplementedException();
+            _shortenerContext.Remove(shortcut);
         }
 
         public Task UpdateAsync(Shortcut shortcut)
