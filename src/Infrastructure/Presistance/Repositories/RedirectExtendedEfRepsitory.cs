@@ -50,9 +50,9 @@ namespace Presistance.Repositories
                 .ToListAsync();
         }
 
-        public Task InsertAsync(RedirectExtended redirectExtended)
+        public async Task InsertAsync(RedirectExtended redirectExtended)
         {
-            throw new System.NotImplementedException();
+            await _shortenerContext.RedirectExtendeds.AddAsync(redirectExtended);
         }
 
         public Task DeleteAsync(RedirectExtended redirectExtended)
