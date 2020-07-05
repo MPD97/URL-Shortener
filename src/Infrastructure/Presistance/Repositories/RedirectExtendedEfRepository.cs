@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Presistance.Repositories
 {
-    public class RedirectExtendedEfRepsitory : IRedirectExtendedRepsitory
+    public class RedirectExtendedEfRepository : IRedirectExtendedRepository
     {
         private readonly ShortenerContext _shortenerContext;
 
-        public RedirectExtendedEfRepsitory(ShortenerContext shortenerContext)
+        public RedirectExtendedEfRepository(ShortenerContext shortenerContext)
         {
             _shortenerContext = shortenerContext;
         }

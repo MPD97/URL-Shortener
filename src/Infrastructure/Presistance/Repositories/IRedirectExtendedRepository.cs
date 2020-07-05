@@ -5,7 +5,7 @@ using Core.Entities;
 
 namespace Presistance.Repositories
 {
-    public interface IRedirectExtendedRepsitory
+    public interface IRedirectExtendedRepository
     {
         public Task<RedirectExtended> FindByIdAsync(long id);
         public Task<RedirectExtended> FindByUrlAsync(string url);
