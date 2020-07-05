@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Context;
 using Core.Entities;
@@ -25,9 +26,9 @@ namespace Presistance.Repositories
             return await _shortenerContext.Shortcuts.SingleOrDefaultAsync(a => a.Alias == alias);
         }
 
-        public Task<long> GetCountAsync()
+        public async Task<long> GetCountAsync()
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.Shortcuts.LongCountAsync();
         }
 
         public Task<IEnumerable<Shortcut>> GetAllAsync()
