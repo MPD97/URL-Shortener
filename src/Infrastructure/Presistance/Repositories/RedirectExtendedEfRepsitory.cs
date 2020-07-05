@@ -52,22 +52,26 @@ namespace Presistance.Repositories
 
         public async Task InsertAsync(RedirectExtended redirectExtended)
         {
-            await _shortenerContext.RedirectExtendeds.AddAsync(redirectExtended);
+            await _shortenerContext.RedirectExtendeds
+                .AddAsync(redirectExtended);
         }
 
         public async Task DeleteAsync(RedirectExtended redirectExtended)
         {
-            _shortenerContext.RedirectExtendeds.Remove(redirectExtended);
+            _shortenerContext.RedirectExtendeds
+                .Remove(redirectExtended);
         }
 
         public async Task UpdateAsync(RedirectExtended redirectExtended)
         {
-            _shortenerContext.RedirectExtendeds.Update(redirectExtended);
+            _shortenerContext.RedirectExtendeds
+                .Update(redirectExtended);
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            return await _shortenerContext.SaveChangesAsync();
+            return await _shortenerContext
+                .SaveChangesAsync();
         }
     }
 }
