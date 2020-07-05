@@ -55,19 +55,19 @@ namespace Presistance.Repositories
             await _shortenerContext.Redirects.AddAsync(redirect);
         }
 
-        public Task DeleteAsync(Redirect redirect)
+        public async Task DeleteAsync(Redirect redirect)
         {
              _shortenerContext.Redirects.Remove(redirect);
         }
 
-        public Task UpdateAsync(Redirect redirect)
+        public async Task UpdateAsync(Redirect redirect)
         {
             _shortenerContext.Redirects.Update(redirect);
         }
 
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.SaveChangesAsync();
         }
     }
 }
