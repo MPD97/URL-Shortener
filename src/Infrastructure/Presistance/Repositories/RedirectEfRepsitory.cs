@@ -1,11 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Context;
 using Core.Entities;
 
 namespace Presistance.Repositories
 {
     public class RedirectEfRepsitory :IRedirectRepsitory
     {
+        private readonly ShortenerContext _shortenerContext;
+
+        public RedirectEfRepsitory(ShortenerContext shortenerContext)
+        {
+            _shortenerContext = shortenerContext;
+        }
+
         public Task<Redirect> FindByIdAsync(long id)
         {
             throw new System.NotImplementedException();
