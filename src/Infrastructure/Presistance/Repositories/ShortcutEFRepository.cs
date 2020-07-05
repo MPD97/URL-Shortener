@@ -18,27 +18,36 @@ namespace Presistance.Repositories
 
         public async Task<Shortcut> FindByIdAsync(long id)
         {
-            return await _shortenerContext.Shortcuts.SingleOrDefaultAsync(a => a.ShortcutId == id);
+            return await _shortenerContext.Shortcuts
+                .SingleOrDefaultAsync(a => a.ShortcutId == id);
         }
 
         public async Task<Shortcut> FindByAliasAsync(string alias)
         {
-            return await _shortenerContext.Shortcuts.SingleOrDefaultAsync(a => a.Alias == alias);
+            return await _shortenerContext.Shortcuts
+                .SingleOrDefaultAsync(a => a.Alias == alias);
         }
 
         public async Task<long> GetCountAsync()
         {
-            return await _shortenerContext.Shortcuts.LongCountAsync();
+            return await _shortenerContext.Shortcuts
+                .LongCountAsync();
         }
 
         public async Task<List<Shortcut>> GetAllAsync()
         {
-            return await _shortenerContext.Shortcuts.OrderByDescending(a => a.ShortcutId).ToListAsync();
+            return await _shortenerContext.Shortcuts
+                .OrderByDescending(a => a.ShortcutId)
+                .ToListAsync();
         }
 
         public async Task<List<Shortcut>> GetAllAsync(int take, int skip)
         {
-            return await _shortenerContext.Shortcuts.OrderByDescending(a => a.ShortcutId).Skip(skip).Take(take).ToListAsync();
+            return await _shortenerContext.Shortcuts
+                .OrderByDescending(a => a.ShortcutId)
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
         }
 
         public Task InsertAsync(Shortcut shortcut)
