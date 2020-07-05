@@ -10,6 +10,7 @@ namespace Presistance.Repositories
         public Task<Shortcut> FindByAliasAsync(string alias);
         public Task<long> GetCountAsync();
         public Task<List<Shortcut>> GetAllAsync();
+        public Task<List<Shortcut>> GetAllAsync(long take, long skip);
         public Task InsertAsync(Shortcut shortcut);
         public Task<bool> DeleteAsync(long id);
         public Task UpdateAsync(Shortcut shortcut);
