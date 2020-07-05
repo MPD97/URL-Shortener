@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Context;
 using Core.Entities;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Presistance.Repositories
 {
-    public class RedirectEfRepsitory :IRedirectRepsitory
+    public class RedirectEfRepsitory : IRedirectRepsitory
     {
         private readonly ShortenerContext _shortenerContext;
 
@@ -17,27 +18,36 @@ namespace Presistance.Repositories
 
         public async Task<Redirect> FindByIdAsync(long id)
         {
-            return await _shortenerContext.Redirects.SingleOrDefaultAsync(a => a.RedirectId == id);
+            return await _shortenerContext.Redirects
+                .SingleOrDefaultAsync(a => a.RedirectId == id);
         }
 
         public async Task<Redirect> FindByUrlAsync(string url)
         {
-            return await _shortenerContext.Redirects.SingleOrDefaultAsync(a => a.Url == url);
+            return await _shortenerContext.Redirects
+                .SingleOrDefaultAsync(a => a.Url == url);
         }
 
         public async Task<long> GetCountAsync()
         {
-            return await _shortenerContext.Redirects.CountAsync();
+            return await _shortenerContext.Redirects
+                .CountAsync();
         }
 
         public async Task<List<Redirect>> GetAllAsync()
         {
-            return await _shortenerContext.Redirects.ToListAsync();
+            return await _shortenerContext.Redirects
+                .OrderByDescending(a => a.RedirectId)
+                .ToListAsync();
         }
 
-        public Task<List<Redirect>> GetAllAsync(int take, int skip)
+        public async Task<List<Redirect>> GetAllAsync(int take, int skip)
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.Redirects
+                .OrderByDescending(a => a.RedirectId)
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
         }
 
         public Task InsertAsync(Redirect redirect)
