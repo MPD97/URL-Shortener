@@ -12,7 +12,7 @@ namespace Presistance.Repositories
         public Task<List<Shortcut>> GetAllAsync();
         public Task<List<Shortcut>> GetAllAsync(int take, int skip);
         public Task InsertAsync(Shortcut shortcut);
-        public Task<bool> DeleteAsync(Shortcut shortcut);
+        public Task DeleteAsync(Shortcut shortcut);
         public Task UpdateAsync(Shortcut shortcut);
         public Task<int> SaveChangesAsync();
     }

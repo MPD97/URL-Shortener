@@ -55,19 +55,19 @@ namespace Presistance.Repositories
             _shortenerContext.Add(shortcut);
         }
 
-        public Task<bool> DeleteAsync(Shortcut shortcut)
+        public async Task DeleteAsync(Shortcut shortcut)
         {
             _shortenerContext.Remove(shortcut);
         }
 
-        public Task UpdateAsync(Shortcut shortcut)
+        public async Task UpdateAsync(Shortcut shortcut)
         {
-            throw new System.NotImplementedException();
+            _shortenerContext.Update(shortcut);
         }
 
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            throw new System.NotImplementedException();
+            return await _shortenerContext.SaveChangesAsync();
         }
     }
 }
