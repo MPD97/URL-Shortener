@@ -5,7 +5,7 @@ namespace Presistance.Services
 {
     public interface IShortcutAdmin
     {
-        public Task InsertAsync(Shortcut shortcut);
+        public Task<Shortcut> InsertAsync(Shortcut shortcut, string url);
         public Task DeleteAsync(Shortcut shortcut);
         public Task UpdateAsync(Shortcut shortcut);
         public Task<int> SaveChangesAsync();
