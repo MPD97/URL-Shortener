@@ -13,9 +13,39 @@ namespace Presistance.Services
             _shortcutRepository = shortcutRepository;
         }
 
-        public async Task InsertAsync(Shortcut shortcut)
+        public async Task<Shortcut> InsertAsync(Shortcut shortcut, string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                return null;
+            }
+
+            if (url.Length <= 80)
+            {
+                shortcut.Redirect = new Redirect
+                {
+                    Url = url,
+                    Shortcut = shortcut,
+                };
+                shortcut.RedirectExtended = null;
+            }
+            else if (url.Length <= 1000)
+            {
+                shortcut.RedirectExtended = new RedirectExtended
+                {
+                    Url = url,
+                    Shortcut = shortcut,
+                };
+                shortcut.Redirect = null;
+            }
+            else
+            {
+                return null;
+            }
+
             await _shortcutRepository.InsertAsync(shortcut);
+
+            return shortcut;
         }
 
         public async Task DeleteAsync(Shortcut shortcut)
