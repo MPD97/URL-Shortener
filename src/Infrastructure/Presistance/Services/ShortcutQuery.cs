@@ -25,12 +25,12 @@ namespace Presistance.Services
 
         public async Task<Shortcut> FindAndInclude(long id)
         {
-            throw new System.NotImplementedException();
+            return await _shortcutRepository.FindByIdAsync(id, true);
         }
 
         public async Task<Shortcut> FindAndInclude(string alias)
         {
-            throw new System.NotImplementedException();
+            return await _shortcutRepository.FindByAliasAsync(alias, true);
         }
 
         public async Task<long> Count()

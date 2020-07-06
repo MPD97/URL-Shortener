@@ -25,12 +25,12 @@ namespace Presistance.Services
 
         public async Task<RedirectExtended> FindAndInclude(long id)
         {
-            throw new System.NotImplementedException();
+            return await _redirectExtendedRepository.FindByIdAsync(id, true);
         }
 
         public async Task<RedirectExtended> FindAndInclude(string url)
         {
-            throw new System.NotImplementedException();
+            return await _redirectExtendedRepository.FindByUrlAsync(url, true);
         }
 
         public async Task<long> Count()

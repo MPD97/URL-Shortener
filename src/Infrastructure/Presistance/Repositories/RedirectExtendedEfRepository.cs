@@ -16,16 +16,32 @@ namespace Presistance.Repositories
             _shortenerContext = shortenerContext;
         }
 
-        public async Task<RedirectExtended> FindByIdAsync(long id)
+        public async Task<RedirectExtended> FindByIdAsync(long id, bool include = false)
         {
-            return await _shortenerContext.RedirectExtendeds
-                .SingleOrDefaultAsync(a => a.RedirectExtendedId == id);
+            IQueryable<RedirectExtended> result = _shortenerContext.RedirectExtendeds;
+           
+            if (include)
+            {
+                result = result
+                    .Include(a => a.Shortcut)
+                    .ThenInclude(a => a.Redirect);
+            }
+
+            return await result.SingleOrDefaultAsync(a => a.RedirectExtendedId == id);
         }
 
-        public async Task<RedirectExtended> FindByUrlAsync(string url)
+        public async Task<RedirectExtended> FindByUrlAsync(string url, bool include = false)
         {
-            return await _shortenerContext.RedirectExtendeds
-                .SingleOrDefaultAsync(a => a.Url == url);
+            IQueryable<RedirectExtended> result = _shortenerContext.RedirectExtendeds;
+           
+            if (include)
+            {
+                result = result
+                    .Include(a => a.Shortcut)
+                    .ThenInclude(a => a.Redirect);
+            }
+
+            return await result.SingleOrDefaultAsync(a => a.Url == url);
         }
 
         public async Task<long> GetCountAsync()
