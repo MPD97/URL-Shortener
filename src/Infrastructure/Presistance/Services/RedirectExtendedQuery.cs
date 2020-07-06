@@ -13,24 +13,14 @@ namespace Presistance.Services
             _redirectExtendedRepository = redirectExtendedRepository;
         }
 
-        public async Task<RedirectExtended> Find(long id)
+        public async Task<RedirectExtended> Find(long id, bool include = false)
         {
-            return await _redirectExtendedRepository.FindByIdAsync(id);
+            return await _redirectExtendedRepository.FindByIdAsync(id,include);
         }
 
-        public async Task<RedirectExtended> Find(string url)
+        public async Task<RedirectExtended> Find(string url, bool include = false)
         {
-            return await _redirectExtendedRepository.FindByUrlAsync(url);
-        }
-
-        public async Task<RedirectExtended> FindAndInclude(long id)
-        {
-            return await _redirectExtendedRepository.FindByIdAsync(id, true);
-        }
-
-        public async Task<RedirectExtended> FindAndInclude(string url)
-        {
-            return await _redirectExtendedRepository.FindByUrlAsync(url, true);
+            return await _redirectExtendedRepository.FindByUrlAsync(url,include);
         }
 
         public async Task<long> Count()
