@@ -7,5 +7,9 @@ namespace Presistance.Services
     {
         public Task<Redirect> Find(long id);
         public Task<Redirect> Find(string url);
+        public Task<Redirect> FindAndInclude(long id);
+        public Task<Redirect> FindAndInclude(string url);
+        public Task<long> Count();
+
     }
 }
