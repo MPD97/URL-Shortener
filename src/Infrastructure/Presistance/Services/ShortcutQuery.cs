@@ -13,26 +13,16 @@ namespace Presistance.Services
             _shortcutRepository = shortcutRepository;
         }
 
-        public async Task<Shortcut> Find(long id)
+        public async Task<Shortcut> Find(long id, bool include = false)
         {
-            return await _shortcutRepository.FindByIdAsync(id);
+            return await _shortcutRepository.FindByIdAsync(id,include);
         }
 
-        public async Task<Shortcut> Find(string alias)
+        public async Task<Shortcut> Find(string alias, bool include = false)
         {
-            return await _shortcutRepository.FindByAliasAsync(alias);
+            return await _shortcutRepository.FindByAliasAsync(alias,include);
         }
-
-        public async Task<Shortcut> FindAndInclude(long id)
-        {
-            return await _shortcutRepository.FindByIdAsync(id, true);
-        }
-
-        public async Task<Shortcut> FindAndInclude(string alias)
-        {
-            return await _shortcutRepository.FindByAliasAsync(alias, true);
-        }
-
+        
         public async Task<long> Count()
         {
             return await _shortcutRepository.GetCountAsync();

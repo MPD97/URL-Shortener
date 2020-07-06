@@ -5,10 +5,8 @@ namespace Presistance.Services
 {
     public interface IShortcutQuery
     {
-        public Task<Shortcut> Find(long id);
-        public Task<Shortcut> Find(string alias);
-        public Task<Shortcut> FindAndInclude(long id);
-        public Task<Shortcut> FindAndInclude(string alias);
+        public Task<Shortcut> Find(long id, bool include = false);
+        public Task<Shortcut> Find(string alias, bool include = false);
         public Task<long> Count();
     }
 }
