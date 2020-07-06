@@ -9,6 +9,6 @@ namespace Presistance.Services
         public Task<Shortcut> Find(string alias);
         public Task<Shortcut> FindAndInclude(long id);
         public Task<Shortcut> FindAndInclude(string alias);
-        public Task<Shortcut> Count();
+        public Task<long> Count();
     }
 }

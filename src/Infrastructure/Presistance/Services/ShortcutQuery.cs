@@ -13,29 +13,29 @@ namespace Presistance.Services
             _shortcutRepository = shortcutRepository;
         }
 
-        public Task<Shortcut> Find(long id)
+        public async Task<Shortcut> Find(long id)
+        {
+            return await _shortcutRepository.FindByIdAsync(id);
+        }
+
+        public async Task<Shortcut> Find(string alias)
+        {
+            return await _shortcutRepository.FindByAliasAsync(alias);
+        }
+
+        public async Task<Shortcut> FindAndInclude(long id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Shortcut> Find(string alias)
+        public async Task<Shortcut> FindAndInclude(string alias)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Shortcut> FindAndInclude(long id)
+        public async Task<long> Count()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<Shortcut> FindAndInclude(string alias)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<Shortcut> Count()
-        {
-            throw new System.NotImplementedException();
+            return await _shortcutRepository.GetCountAsync();
         }
     }
 }
