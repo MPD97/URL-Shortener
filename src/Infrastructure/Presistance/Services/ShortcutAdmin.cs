@@ -13,24 +13,24 @@ namespace Presistance.Services
             _shortcutRepository = shortcutRepository;
         }
 
-        public Task InsertAsync(Shortcut shortcut)
+        public async Task InsertAsync(Shortcut shortcut)
         {
-            throw new System.NotImplementedException();
+            await _shortcutRepository.InsertAsync(shortcut);
         }
 
-        public Task DeleteAsync(Shortcut shortcut)
+        public async Task DeleteAsync(Shortcut shortcut)
         {
-            throw new System.NotImplementedException();
+            await _shortcutRepository.DeleteAsync(shortcut);
         }
 
-        public Task UpdateAsync(Shortcut shortcut)
+        public async Task UpdateAsync(Shortcut shortcut)
         {
-            throw new System.NotImplementedException();
+            await _shortcutRepository.UpdateAsync(shortcut);
         }
 
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            throw new System.NotImplementedException();
+            return await _shortcutRepository.SaveChangesAsync();
         }
     }
 }
