@@ -13,7 +13,7 @@ namespace Presistance.Services
             _redirectRepository = redirectRepository;
         }
 
-        public async Task<Redirect> Find(int id)
+        public async Task<Redirect> Find(long id)
         {
             return await _redirectRepository.FindByIdAsync(id);
         }
