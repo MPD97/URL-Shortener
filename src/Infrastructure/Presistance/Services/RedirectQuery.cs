@@ -22,5 +22,20 @@ namespace Presistance.Services
         {
             return await _redirectRepository.FindByUrlAsync(url);
         }
+
+        public async Task<Redirect> FindAndInclude(long id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<Redirect> FindAndInclude(string url)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<long> Count()
+        {
+            return await _redirectRepository.GetCountAsync();
+        }
     }
 }
