@@ -6,8 +6,8 @@ namespace Presistance.Repositories
 {
     public interface IShortcutRepository
     {
-        public Task<Shortcut> FindByIdAsync(long id);
-        public Task<Shortcut> FindByAliasAsync(string alias);
+        public Task<Shortcut> FindByIdAsync(long id, bool include = false);
+        public Task<Shortcut> FindByAliasAsync(string alias, bool include = false);
         public Task<long> GetCountAsync();
         public Task<List<Shortcut>> GetAllAsync();
         public Task<List<Shortcut>> GetAllAsync(int take, int skip);

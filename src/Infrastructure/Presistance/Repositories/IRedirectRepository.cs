@@ -6,8 +6,8 @@ namespace Presistance.Repositories
 {
     public interface IRedirectRepository
     {
-        public Task<Redirect> FindByIdAsync(long id);
-        public Task<Redirect> FindByUrlAsync(string url);
+        public Task<Redirect> FindByIdAsync(long id, bool include = false);
+        public Task<Redirect> FindByUrlAsync(string url, bool include = false);
         public Task<long> GetCountAsync();
         public Task<List<Redirect>> GetAllAsync();
         public Task<List<Redirect>> GetAllAsync(int take, int skip);
