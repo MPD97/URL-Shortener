@@ -13,24 +13,14 @@ namespace Presistance.Services
             _redirectRepository = redirectRepository;
         }
 
-        public async Task<Redirect> Find(long id)
+        public async Task<Redirect> Find(long id, bool include = false)
         {
-            return await _redirectRepository.FindByIdAsync(id);
+            return await _redirectRepository.FindByIdAsync(id, include);
         }
 
-        public async Task<Redirect> Find(string url)
+        public async Task<Redirect> Find(string url, bool include = false)
         {
-            return await _redirectRepository.FindByUrlAsync(url);
-        }
-
-        public async Task<Redirect> FindAndInclude(long id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<Redirect> FindAndInclude(string url)
-        {
-            throw new System.NotImplementedException();
+            return await _redirectRepository.FindByUrlAsync(url, include);
         }
 
         public async Task<long> Count()
