@@ -6,6 +6,7 @@ namespace Core.Entities
     {
         public long ShortcutId { get; set; }
         public string Alias { get; set; }
+        
         public long TimesRedirect { get; set; }
         
         public long? RedirectId { get; set; }
