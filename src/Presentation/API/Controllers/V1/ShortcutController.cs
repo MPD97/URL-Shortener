@@ -48,9 +48,10 @@ namespace API.Controllers.V1
             {
                 return BadRequest("ValidationError");
             }
+
             Uri uriResult;
-            bool validUrl = Uri.TryCreate(request.Url, UriKind.Absolute, out uriResult) 
-                          && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            var validUrl = Uri.TryCreate(request.Url, UriKind.Absolute, out uriResult)
+                           && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
             if (!validUrl)
             {
                 return BadRequest("Url is not valid url");
@@ -61,17 +62,17 @@ namespace API.Controllers.V1
             {
                 return BadRequest($"This url exist. Use {redirect.Shortcut.Alias}");
             }
-            
+
             var redirectExtended = await _redirectExtendedQuery.Find(request.Url, true);
             if (redirectExtended != null)
             {
                 return BadRequest($"This url exist. Use {redirectExtended.Shortcut.Alias}");
             }
-            
+
             Shortcut shortcut = null;
 
             if (!string.IsNullOrEmpty(request.Alias))
-            { 
+            {
                 shortcut = await _shortcutQuery.Find(request.Alias);
                 if (shortcut != null)
                 {
@@ -82,7 +83,7 @@ namespace API.Controllers.V1
             }
             else
             {
-                int i = 1;
+                var i = 1;
                 var alias = _generator.Generate(i);
                 while ((shortcut = await _shortcutQuery.Find(alias)) != null)
                 {
@@ -96,17 +97,40 @@ namespace API.Controllers.V1
 
                 shortcut = await _shortcutAdmin.InsertAsync(alias, request.Url);
             }
-                            
+
             var result = await _shortcutAdmin.SaveChangesAsync();
             if (result <= 0)
             {
                 return StatusCode(500, "Error");
             }
+
             return StatusCode(201, new ShortcutCreateResponse
             {
                 Alias = shortcut.Alias,
                 Url = request.Url
             });
+        }
+
+        [HttpGet("RedirectTo/{alias}")]
+        public async Task<IActionResult> RedirectTo(string alias)
+        {
+            var result = await _shortcutQuery.Find(alias, true);
+            if (result == null)
+            {
+                return BadRequest("Shortcut with this alias not exists.");
+            }
+
+            if (result.Redirect != null)
+            {
+                return Redirect(result.Redirect.Url);
+            }
+
+            if (result.RedirectExtended != null)
+            {
+                return Redirect(result.RedirectExtended.Url);
+            }
+
+            return StatusCode(500, "Error");
         }
     }
 }
