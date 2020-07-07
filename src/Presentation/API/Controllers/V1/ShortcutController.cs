@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.DTOs.Requests;
 using Core.DTOs.Responses;
@@ -29,6 +31,29 @@ namespace API.Controllers.V1
             _redirectExtendedQuery = redirectExtendedQuery;
         }
 
+        [HttpGet()]
+        public async Task<IActionResult> GetAll(int? skip = null, int? take = null)
+        {
+            List<Shortcut> result = null;
+            if (skip.HasValue && take.HasValue)
+            {
+                result = await _shortcutQuery.All(take.Value, skip.Value);
+            }
+            else
+            {
+                result = await _shortcutQuery.All();
+            }
+
+
+            return Ok(result.Select(shortcut => new ShortcutGetResponse
+            {
+                Alias = shortcut.Alias,
+                Url = shortcut.RedirectExtended != null ? shortcut.RedirectExtended.Url : shortcut.Redirect.Url,
+                ShortcutId = shortcut.ShortcutId,
+                TimesRedirect = shortcut.TimesRedirect
+            }));
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(long id)
         {
@@ -41,7 +66,7 @@ namespace API.Controllers.V1
             return Ok(new ShortcutGetResponse
             {
                 Alias = result.Alias,
-                Url = result.RedirectExtended != null? result.RedirectExtended.Url: result.Redirect.Url,
+                Url = result.RedirectExtended != null ? result.RedirectExtended.Url : result.Redirect.Url,
                 ShortcutId = result.ShortcutId,
                 TimesRedirect = result.TimesRedirect
             });
@@ -125,13 +150,13 @@ namespace API.Controllers.V1
             {
                 return BadRequest("Shortcut with this alias not exists.");
             }
-            
+
             shortcut = await _shortcutAdmin.IncreaseRedirectCount(shortcut);
-            if (await  _shortcutAdmin.SaveChangesAsync() <= 0)
+            if (await _shortcutAdmin.SaveChangesAsync() <= 0)
             {
                 return StatusCode(500, "Error");
             }
-            
+
             if (shortcut.Redirect != null)
             {
                 return Redirect(shortcut.Redirect.Url);
