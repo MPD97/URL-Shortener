@@ -19,7 +19,7 @@ namespace Presistance.Repositories
         public async Task<Shortcut> FindByIdAsync(long id, bool include = false)
         {
             IQueryable<Shortcut> result = _shortenerContext.Shortcuts;
-           
+
             if (include)
             {
                 result = result
@@ -33,7 +33,7 @@ namespace Presistance.Repositories
         public async Task<Shortcut> FindByAliasAsync(string alias, bool include = false)
         {
             IQueryable<Shortcut> result = _shortenerContext.Shortcuts;
-           
+
             if (include)
             {
                 result = result
@@ -53,6 +53,8 @@ namespace Presistance.Repositories
         public async Task<List<Shortcut>> GetAllAsync()
         {
             return await _shortenerContext.Shortcuts
+                .Include(a => a.Redirect)
+                .Include(a => a.RedirectExtended)
                 .OrderByDescending(a => a.ShortcutId)
                 .ToListAsync();
         }
@@ -60,6 +62,8 @@ namespace Presistance.Repositories
         public async Task<List<Shortcut>> GetAllAsync(int take, int skip)
         {
             return await _shortenerContext.Shortcuts
+                .Include(a => a.Redirect)
+                .Include(a => a.RedirectExtended)
                 .OrderByDescending(a => a.ShortcutId)
                 .Skip(skip)
                 .Take(take)
