@@ -38,7 +38,13 @@ namespace API.Controllers.V1
                 return BadRequest("Shortcut with this id not exists.");
             }
 
-            return Ok(result);
+            return Ok(new ShortcutGetResponse
+            {
+                Alias = result.Alias,
+                Url = result.RedirectExtended != null? result.RedirectExtended.Url: result.Redirect.Url,
+                ShortcutId = result.ShortcutId,
+                TimesRedirect = result.TimesRedirect
+            });
         }
 
         [HttpPost()]
