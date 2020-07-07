@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
 
 namespace Presistance.Services
 {
-    public class AliasGenerator :IAliasGenerator
+    public class AliasGenerator : IAliasGenerator
     {
         private readonly Random _random;
+        private const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
 
         public AliasGenerator()
         {
@@ -13,8 +16,10 @@ namespace Presistance.Services
 
         public string Generate(int length)
         {
-            throw new System.NotImplementedException();
+            return new string(Enumerable.Repeat(Chars, length)
+                .Select(s => s[_random.Next(s.Length)]).ToArray());
         }
+
         public string Generate(int length, Random random)
         {
             throw new System.NotImplementedException();
