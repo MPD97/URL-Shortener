@@ -32,7 +32,7 @@ namespace API.Controllers.V1
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(long id)
         {
-            var result = await _shortcutQuery.Find(id);
+            var result = await _shortcutQuery.Find(id, true);
             if (result == null)
             {
                 return BadRequest("Shortcut with this id not exists.");
@@ -114,20 +114,26 @@ namespace API.Controllers.V1
         [HttpGet("RedirectTo/{alias}")]
         public async Task<IActionResult> RedirectTo(string alias)
         {
-            var result = await _shortcutQuery.Find(alias, true);
-            if (result == null)
+            var shortcut = await _shortcutQuery.Find(alias, true);
+            if (shortcut == null)
             {
                 return BadRequest("Shortcut with this alias not exists.");
             }
-
-            if (result.Redirect != null)
+            
+            shortcut = await _shortcutAdmin.IncreaseRedirectCount(shortcut);
+            if (await  _shortcutAdmin.SaveChangesAsync() <= 0)
             {
-                return Redirect(result.Redirect.Url);
+                return StatusCode(500, "Error");
+            }
+            
+            if (shortcut.Redirect != null)
+            {
+                return Redirect(shortcut.Redirect.Url);
             }
 
-            if (result.RedirectExtended != null)
+            if (shortcut.RedirectExtended != null)
             {
-                return Redirect(result.RedirectExtended.Url);
+                return Redirect(shortcut.RedirectExtended.Url);
             }
 
             return StatusCode(500, "Error");
