@@ -3,9 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace API.Installers
 {
-    public interface IInstaler
+    public interface IInstaller
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration);
-
     }
 }
