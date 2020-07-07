@@ -13,7 +13,7 @@ namespace API.Controllers.V1
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class ShortcutController : Controller
+    public class ShortcutsController : Controller
     {
         private readonly IShortcutQuery _shortcutQuery;
         private readonly IAliasGenerator _generator;
@@ -21,7 +21,7 @@ namespace API.Controllers.V1
         private readonly IRedirectQuery _redirectQuery;
         private readonly IRedirectExtendedQuery _redirectExtendedQuery;
 
-        public ShortcutController(IShortcutQuery shortcutQuery, IAliasGenerator generator, IShortcutAdmin shortcutAdmin,
+        public ShortcutsController(IShortcutQuery shortcutQuery, IAliasGenerator generator, IShortcutAdmin shortcutAdmin,
             IRedirectQuery redirectQuery, IRedirectExtendedQuery redirectExtendedQuery)
         {
             _shortcutQuery = shortcutQuery;

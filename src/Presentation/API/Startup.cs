@@ -72,7 +72,7 @@ namespace API
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "/api/v1/Shortcut/RedirectTo/{alias}");
+                    pattern: "/api/v1/Shortcuts/RedirectTo/{alias}");
             });
         }
     }
