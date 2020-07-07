@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Core\Core.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Presistance\Presistance.csproj" />
   </ItemGroup>
 
 
