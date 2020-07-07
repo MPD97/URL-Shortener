@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Installers;
 using Core.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +27,12 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var installers = typeof(Program).Assembly.ExportedTypes
+                .Where(x => typeof(IInstaller).IsAssignableFrom(x)
+                       && x.IsInterface == false &&
+                       x.IsAbstract == false)
+                .Select(Activator.CreateInstance).Cast<IInstaller>().ToList();
+            
             services.AddDbContext<ShortenerContext>(builder =>
             {
                 builder.UseSqlServer(Configuration.GetConnectionString("LocalDb"));
