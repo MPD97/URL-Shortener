@@ -22,7 +22,8 @@ namespace Presistance.Services
 
         public string Generate(int length, Random random)
         {
-            throw new System.NotImplementedException();
+            return new string(Enumerable.Repeat(Chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
