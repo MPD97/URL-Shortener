@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.Entities;
 using Presistance.Repositories;
 
@@ -22,7 +23,17 @@ namespace Presistance.Services
         {
             return await _shortcutRepository.FindByAliasAsync(alias,include);
         }
-        
+
+        public async Task<List<Shortcut>> All()
+        {
+            return await _shortcutRepository.GetAllAsync();
+        }
+
+        public async Task<List<Shortcut>> All(int take, int skip)
+        {
+            return await _shortcutRepository.GetAllAsync(take, skip);
+        }
+
         public async Task<long> Count()
         {
             return await _shortcutRepository.GetCountAsync();
