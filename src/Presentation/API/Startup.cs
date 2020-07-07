@@ -32,17 +32,17 @@ namespace API
         {
             var installers = typeof(Program).Assembly.ExportedTypes
                 .Where(x => typeof(IInstaller).IsAssignableFrom(x)
-                       && x.IsInterface == false &&
-                       x.IsAbstract == false)
+                            && x.IsInterface == false &&
+                            x.IsAbstract == false)
                 .Select(Activator.CreateInstance).Cast<IInstaller>().ToList();
-            
+
             installers.ForEach(i => i.InstallServices(services, Configuration));
 
             services.AddDbContext<ShortenerContext>(builder =>
             {
                 builder.UseSqlServer(Configuration.GetConnectionString("LocalDb"));
             });
-            
+
             services.AddControllers();
         }
 
@@ -54,11 +54,11 @@ namespace API
                 context.Database.Migrate();
 
             app.UseMiddleware<LoggingMiddleware>();
-            
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "URL-Shortener.API v1"); });
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -72,7 +72,7 @@ namespace API
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "/api​/v1​/Shortcut​/RedirectTo​/{alias}");
+                    pattern: "/api/v1/Shortcut/RedirectTo/{alias}");
             });
         }
     }
