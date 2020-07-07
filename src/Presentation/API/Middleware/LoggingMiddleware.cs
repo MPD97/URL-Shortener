@@ -18,7 +18,7 @@ namespace API.Middleware
             _logger = logger;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task Invoke(HttpContext context) 
         {
             _stopwatch.Start();
 
@@ -26,8 +26,10 @@ namespace API.Middleware
 
             _stopwatch.Stop();
 
-            var time= _stopwatch.ElapsedMilliseconds;
-            _logger.LogInformation($"{context.Request.QueryString} - {time} milliseconds.");
+            var milliseconds= _stopwatch.ElapsedMilliseconds;
+            
+            _logger.LogInformation($"{context.Request.Method} - {context.Request.Path.ToString()} - {milliseconds} milliseconds.");
+            
             _stopwatch.Reset();
         }
     }
