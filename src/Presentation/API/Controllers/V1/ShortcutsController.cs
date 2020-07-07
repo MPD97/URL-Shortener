@@ -146,6 +146,7 @@ namespace API.Controllers.V1
             });
         }
 
+        [HttpGet("/{alias}")]
         [HttpGet("RedirectTo/{alias}")]
         public async Task<IActionResult> RedirectTo(string alias)
         {

@@ -70,9 +70,7 @@ namespace API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "/api/v1/Shortcuts/RedirectTo/{alias}");
+                endpoints.MapControllers();
             });
         }
     }
