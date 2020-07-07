@@ -53,6 +53,11 @@ namespace API.Controllers.V1
                 TimesRedirect = shortcut.TimesRedirect
             }));
         }
+        [HttpGet("Amount")]
+        public async Task<IActionResult> Amount()
+        {
+            return Ok(await _shortcutQuery.Count());
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(long id)
@@ -80,8 +85,7 @@ namespace API.Controllers.V1
                 return BadRequest("ValidationError");
             }
 
-            Uri uriResult;
-            var validUrl = Uri.TryCreate(request.Url, UriKind.Absolute, out uriResult)
+            var validUrl = Uri.TryCreate(request.Url, UriKind.Absolute, out var uriResult)
                            && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
             if (!validUrl)
             {
