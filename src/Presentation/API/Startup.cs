@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Installers;
+using API.Middleware;
 using Core.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -50,6 +53,8 @@ namespace API
             using (var context = scope.ServiceProvider.GetService<ShortenerContext>())
                 context.Database.Migrate();
 
+            app.UseMiddleware<LoggingMiddleware>();
+            
             app.UseSwagger();
 
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "URL-Shortener.API v1"); });

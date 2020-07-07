@@ -16,7 +16,7 @@ namespace API.Controllers.V1
             _shortcutQuery = shortcutQuery;
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(long id)
         {
             var result = await _shortcutQuery.Find(id);
