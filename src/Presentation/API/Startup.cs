@@ -33,6 +33,8 @@ namespace API
                        x.IsAbstract == false)
                 .Select(Activator.CreateInstance).Cast<IInstaller>().ToList();
             
+            installers.ForEach(i => i.InstallServices(services, Configuration));
+
             services.AddDbContext<ShortenerContext>(builder =>
             {
                 builder.UseSqlServer(Configuration.GetConnectionString("LocalDb"));
@@ -48,6 +50,10 @@ namespace API
             using (var context = scope.ServiceProvider.GetService<ShortenerContext>())
                 context.Database.Migrate();
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "URL-Shortener.API v1"); });
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
