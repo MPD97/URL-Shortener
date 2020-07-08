@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20200708072021_SeedData01.Designer.cs" />
     <Compile Remove="Migrations\20200708073035_BogusSeed10K.cs" />
     <Compile Remove="Migrations\20200708073035_BogusSeed10K.Designer.cs" />
+    <Compile Remove="Migrations\20200708073214_BogusSeed10K.cs" />
+    <Compile Remove="Migrations\20200708073214_BogusSeed10K.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
