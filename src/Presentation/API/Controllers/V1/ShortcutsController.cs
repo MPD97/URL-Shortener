@@ -8,6 +8,7 @@ using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Presistance.Repositories;
 using Presistance.Services;
+using Presistance.Services.Cache;
 
 namespace API.Controllers.V1
 {
@@ -20,15 +21,17 @@ namespace API.Controllers.V1
         private readonly IShortcutAdmin _shortcutAdmin;
         private readonly IRedirectQuery _redirectQuery;
         private readonly IRedirectExtendedQuery _redirectExtendedQuery;
+        private readonly ICacheService _cache;
 
         public ShortcutsController(IShortcutQuery shortcutQuery, IAliasGenerator generator, IShortcutAdmin shortcutAdmin,
-            IRedirectQuery redirectQuery, IRedirectExtendedQuery redirectExtendedQuery)
+            IRedirectQuery redirectQuery, IRedirectExtendedQuery redirectExtendedQuery, ICacheService cache)
         {
             _shortcutQuery = shortcutQuery;
             _generator = generator;
             _shortcutAdmin = shortcutAdmin;
             _redirectQuery = redirectQuery;
             _redirectExtendedQuery = redirectExtendedQuery;
+            _cache = cache;
         }
 
         [HttpGet()]
@@ -56,7 +59,12 @@ namespace API.Controllers.V1
         [HttpGet("Amount")]
         public async Task<IActionResult> Amount()
         {
-            return Ok(await _shortcutQuery.Count());
+            if (!long.TryParse(await _cache.GetCacheValueAsync("Amount-Of-All-Shortcuts"), out var result))
+            { 
+                result = await _shortcutQuery.Count();
+                await _cache.SetChacheValueAsync("Amount-Of-All-Shortcuts", result.ToString());
+            }
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
