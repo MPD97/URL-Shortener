@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Presistance.Services.Cache;
 using StackExchange.Redis;
 
 namespace API
@@ -44,7 +45,7 @@ namespace API
             {
                 builder.UseSqlServer(Configuration.GetConnectionString("LocalDb"));
             });
-
+            services.AddSingleton<ICacheService, RedisCacheServiceService>();
             services.AddSingleton<IConnectionMultiplexer>(x =>
                 ConnectionMultiplexer.Connect(Configuration["RedisConnection"]));
             
