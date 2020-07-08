@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -44,6 +45,9 @@ namespace API
                 builder.UseSqlServer(Configuration.GetConnectionString("LocalDb"));
             });
 
+            services.AddSingleton<IConnectionMultiplexer>(x =>
+                ConnectionMultiplexer.Connect(Configuration["RedisConnection"]));
+            
             services.AddControllers();
         }
 
