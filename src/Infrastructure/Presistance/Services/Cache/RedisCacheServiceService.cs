@@ -19,10 +19,10 @@ namespace Presistance.Services.Cache
             return await database.StringGetAsync(key);
         }
 
-        public async Task SetChacheValueAsync(string key, string value)
+        public async Task SetChacheValueAsync(string key, string value, TimeSpan timeSpan)
         {
             var database = _multiplexer.GetDatabase();
-            await database.StringSetAsync(key, value, TimeSpan.FromMinutes(30));
+            await database.StringSetAsync(key, value, timeSpan);
         }
     }
 }

@@ -62,7 +62,7 @@ namespace API.Controllers.V1
             if (!long.TryParse(await _cache.GetCacheValueAsync("Amount-Of-All-Shortcuts"), out var result))
             { 
                 result = await _shortcutQuery.Count();
-                await _cache.SetChacheValueAsync("Amount-Of-All-Shortcuts", result.ToString());
+                await _cache.SetChacheValueAsync("Amount-Of-All-Shortcuts", result.ToString(), TimeSpan.FromMinutes(1));
             }
             return Ok(result);
         }

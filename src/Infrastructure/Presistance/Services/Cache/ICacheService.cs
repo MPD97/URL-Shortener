@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Presistance.Services.Cache
 {
     public interface ICacheService
     {
         public Task<string> GetCacheValueAsync(string key);
-        public Task SetChacheValueAsync(string key, string value);
+        public Task SetChacheValueAsync(string key, string value, TimeSpan timeSpan);
     }
 }
