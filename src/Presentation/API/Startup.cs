@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using API.Installers;
 using API.Middleware;
 using Core.Context;
+using Core.Seed;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -51,7 +52,11 @@ namespace API
         {
             using (var scope = app.ApplicationServices.CreateScope())
             using (var context = scope.ServiceProvider.GetService<ShortenerContext>())
+            {
                 context.Database.Migrate();
+                // Uncomment this line for a first run to populate database with some data. Sometimes duplicates can occur so try again.
+                // new DataSeeder(context).PopulateData(10000).Wait();
+            }
 
             app.UseMiddleware<LoggingMiddleware>();
 
