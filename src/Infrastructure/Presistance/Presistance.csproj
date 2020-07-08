@@ -8,4 +8,8 @@
     <ProjectReference Include="..\..\Domain\Core\Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
+  </ItemGroup>
+
 </Project>
