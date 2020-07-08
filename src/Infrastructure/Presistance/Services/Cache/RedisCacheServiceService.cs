@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using StackExchange.Redis;
 
 namespace Presistance.Services.Cache
@@ -21,7 +22,7 @@ namespace Presistance.Services.Cache
         public async Task SetChacheValueAsync(string key, string value)
         {
             var database = _multiplexer.GetDatabase();
-            await database.StringSetAsync(key, value);
+            await database.StringSetAsync(key, value, TimeSpan.FromMinutes(30));
         }
     }
 }
