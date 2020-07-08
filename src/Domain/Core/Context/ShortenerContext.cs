@@ -39,7 +39,7 @@ namespace Core.Context
             
             long shortcutId = 1;
             var shortcutFakerOne = new Faker<Shortcut>()
-                .RuleFor(a => a.Alias, f => f.Random.AlphaNumeric(new Random().Next(3,30)))
+                .RuleFor(a => a.Alias, f => f.Random.AlphaNumeric(new Random().Next(5,30)))
                 .RuleFor(a => a.ShortcutId, f => shortcutId++)
                 .RuleFor(a => a.TimesRedirect, f => f.Random.Long(min:0, max: 999999999));
             
