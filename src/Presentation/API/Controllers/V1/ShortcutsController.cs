@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Core.DTOs.Requests;
 using Core.DTOs.Responses;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Presistance.Repositories;
 using Presistance.Services;
 using Presistance.Services.Cache;
@@ -70,19 +72,27 @@ namespace API.Controllers.V1
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(long id)
         {
-            var result = await _shortcutQuery.Find(id, true);
-            if (result == null)
+            string cached = null; 
+            if (string.IsNullOrEmpty(cached = await _cache.GetCacheValueAsync($"Shortcut-{id}")))
             {
-                return BadRequest("Shortcut with this id not exists.");
+                var result = await _shortcutQuery.Find(id, true);
+                if (result == null)
+                {
+                    return BadRequest("Shortcut with this id not exists.");
+                }
+                
+                var mapped = new ShortcutGetResponse
+                {
+                    Alias = result.Alias,
+                    Url = result.RedirectExtended != null ? result.RedirectExtended.Url : result.Redirect.Url,
+                    ShortcutId = result.ShortcutId,
+                    TimesRedirect = result.TimesRedirect
+                };
+                cached = JsonConvert.SerializeObject(mapped, Formatting.Indented);
+                await _cache.SetChacheValueAsync($"Shortcut-{mapped.ShortcutId}",cached
+                    , TimeSpan.FromMinutes(15));
             }
-
-            return Ok(new ShortcutGetResponse
-            {
-                Alias = result.Alias,
-                Url = result.RedirectExtended != null ? result.RedirectExtended.Url : result.Redirect.Url,
-                ShortcutId = result.ShortcutId,
-                TimesRedirect = result.TimesRedirect
-            });
+            return Ok(JsonConvert.DeserializeObject<ShortcutGetResponse>(cached));
         }
 
         [HttpPost()]
