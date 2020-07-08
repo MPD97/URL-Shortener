@@ -82,6 +82,9 @@ namespace Core.Migrations
 
                     b.HasKey("ShortcutId");
 
+                    b.HasIndex("Alias")
+                        .IsUnique();
+
                     b.HasIndex("RedirectExtendedId")
                         .IsUnique()
                         .HasFilter("[RedirectExtendedId] IS NOT NULL");
