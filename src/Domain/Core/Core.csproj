@@ -5,6 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200704210015_ShortcutEntityHasOptionalRelations.cs" />
+    <Compile Remove="Migrations\20200704210015_ShortcutEntityHasOptionalRelations.Designer.cs" />
+    <Compile Remove="Migrations\20200708070938_SeedData.cs" />
+    <Compile Remove="Migrations\20200708070938_SeedData.Designer.cs" />
+    <Compile Remove="Migrations\20200708071203_SeedData.cs" />
+    <Compile Remove="Migrations\20200708071203_SeedData.Designer.cs" />
+    <Compile Remove="Migrations\20200708071401_SeedData.cs" />
+    <Compile Remove="Migrations\20200708071401_SeedData.Designer.cs" />
+    <Compile Remove="Migrations\20200708072021_SeedData01.cs" />
+    <Compile Remove="Migrations\20200708072021_SeedData01.Designer.cs" />
+    <Compile Remove="Migrations\20200708073035_BogusSeed10K.cs" />
+    <Compile Remove="Migrations\20200708073035_BogusSeed10K.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="29.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
