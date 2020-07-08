@@ -14,6 +14,9 @@ namespace Core.Configurations
         {
             builder.HasKey(a => a.ShortcutId);
 
+            builder.HasIndex(a => a.Alias)
+                .IsUnique(true);
+            
             builder.Property(a => a.Alias)
                 .HasMaxLength(30)
                 .IsRequired(true);
